@@ -1,1 +1,62 @@
 <h1>Calculate My Post-Sales-Tax Item Price For Me</h1>
+
+<p>Need to know the true post-tax price of each item on a receipt? Use the calculator below</p>
+
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Pre-Tax Price</th>
+    <th>Post-Tax Price</th>
+  </tr>
+  <tr>
+    <td class="name">
+      <input type="text" name="item-name">
+    </td>
+    <td class="pre-tax">
+      <input type="text" name="pre-tax" oninput="updateTotal()">
+    </td>
+    <td class="post-tax">
+    </td>
+  </tr>
+</table>
+
+<button id="add-new-item" onclick="addNewItem()">Add New Item</button>
+<h3>pre-tax subtotal: $<span id="pre-tax-subtotal">0</span></h3>
+
+<script type="text/javascript">
+  var blankRow = `
+    <td class="name">
+      <input type="text" name="item-name">
+    </td>
+    <td class="pre-tax">
+      <input type="text" name="pre-tax" oninput="updateTotal()">
+    </td>
+    <td class="post-tax">
+    </td>
+  `;
+
+  function addNewItem() {
+    table = document.getElementsByTagName("table")[0]
+    table.insertRow()
+    insertedRow = table.rows[table.rows.length-1]
+    insertedRow.innerHTML = blankRow
+  }
+
+  function updateTotal(e) {
+    preTax = document.getElementsByName("pre-tax")
+    total = 0
+    for (let i = 0; i < preTax.length; i++) {
+      p = preTax[i]
+      if (p.value != '') {
+        value = parseFloat(p.value)
+        total += value
+      }
+    }
+
+    total = Math.round((total + Number.EPSILON) * 100) / 100
+    subtotal = document.getElementById("pre-tax-subtotal")
+    subtotal.innerHTML = total
+  }
+
+
+</script>
