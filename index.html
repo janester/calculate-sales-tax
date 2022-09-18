@@ -7,6 +7,7 @@
     <th>Item Name</th>
     <th>Pre-Tax Price</th>
     <th>Post-Tax Price</th>
+    <th>Remove Item</th>
   </tr>
   <tr>
     <td class="name">
@@ -17,6 +18,9 @@
     </td>
     <td class="post-tax">
       $0
+    </td>
+    <td>
+      <button onclick="remove(this)">x</button>
     </td>
   </tr>
 </table>
@@ -36,6 +40,9 @@
     </td>
     <td class="post-tax">
       $0
+    </td>
+    <td>
+      <button onclick="remove(this)">x</button>
     </td>
   `;
 
@@ -87,7 +94,11 @@
       postTaxEl = row.getElementsByClassName("post-tax")[0]
       postTaxEl.innerHTML = "$" + postTax.toFixed(2)
     }
+  }
 
+  function remove(e) {
+    e.parentElement.parentElement.remove()
+    updateTotal()
   }
 
 
