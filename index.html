@@ -80,15 +80,12 @@
       row = table.rows[i]
       preTax = row.getElementsByClassName("pre-tax")[0].getElementsByTagName("input")[0].value
       preTax = parseFloat(preTax)
-      console.log("preTax", preTax)
 
       postTax = (preTax * (1 + taxRate))
       postTax = Math.round((postTax + Number.EPSILON) * 100) / 100
-      console.log("posttax", postTax)
 
       postTaxEl = row.getElementsByClassName("post-tax")[0]
-      postTaxEl.innerHTML = "$" + postTax.toString()
-      console.log(postTaxEl)
+      postTaxEl.innerHTML = "$" + postTax.toFixed(2)
     }
 
   }
